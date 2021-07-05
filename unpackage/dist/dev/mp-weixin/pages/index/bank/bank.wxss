@@ -1,0 +1,117 @@
+
+page{
+	background-color:#F2F2F2;
+}
+.container{
+	width:100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.bankList{
+	width:90%;
+	height:250rpx;
+	border-radius: 10rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	margin-top: 20rpx;
+	/* background: linear-gradient(rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0.5)), url('/static/img/jianshe_bg.png') no-repeat 0% 20%/ cover; */
+}
+.bankList .left{
+	width:100rpx;
+	height:100%;
+	padding:20rpx 0 0 30rpx
+}
+.logo{
+	width:70rpx;
+	height:70rpx;
+	border-radius: 50%;
+	background-color: #ffffff;
+	opacity: 0.7;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.logo image{
+	width:50rpx;
+	height:50rpx;
+}
+.bankList .right{
+	height:100%;
+	-webkit-box-flex:1;
+	-webkit-flex:1;
+	        flex:1;
+	margin-left:10rpx;
+	padding-top:20rpx;
+}
+.bank_name{
+	color:#ffffff;
+	font-size: 35rpx;
+}
+.bank_type{
+	color:#ffffff;
+	font-size: 18rpx;
+	opacity: 0.7;
+}
+.bank_account{
+	margin-top:50rpx;
+	color:#ffffff;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+}
+.bank_account .number{
+	margin-right:50rpx;
+	font-size:50rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.point{
+	width:15rpx;
+	height:15rpx;
+	border-radius: 50%;
+	background-color: #ffffff;
+	margin-right:10rpx;
+}
+.add_bank{
+	margin-top: 20rpx;
+	width:88%;
+	height:100rpx;
+	background-color: #FFFFFF;
+	padding-left: 20rpx;
+	border-radius: 10rpx;
+}
+.btn{
+	width:100%;
+	height:100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.click{
+	background-color: 	#DCDCDC;
+}
+

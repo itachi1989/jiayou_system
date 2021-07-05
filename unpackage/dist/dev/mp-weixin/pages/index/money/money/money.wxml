@@ -1,0 +1,1 @@
+<view class="container"><view class="content"><view><image class="img" src="../../../../static/img/money_2.png"></image></view><view class="money">{{'¥'+purse.list[0].money+''}}</view><navigator url="./charge/charge/charge"><view class="charge">充值</view></navigator></view></view>
