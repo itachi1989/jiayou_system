@@ -5,6 +5,7 @@ import bank from './modules/bank/bank.js'
 import person from './modules/person/person.js'
 import business from './modules/business/business.js'
 import goods from './modules/goods/goods.js'
+import footbar from './modules/footbar/footbar.js'
 
 Vue.use(Vuex)
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
 			bank,
 			person,
 			business,
-			goods
+			goods,
+			footbar,
 		}	
 })

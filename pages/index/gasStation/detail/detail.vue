@@ -83,7 +83,7 @@
 							<view class="price">￥{{item.price}}</view>
 							<image class="sub" src="/static/img/sub.png" @click="subtract(index)"></image>
 							<view class="number">{{item.number}}</view>
-							<view class="add" @click="increment(index)">+</view>
+							<image class="add" @click="increment(index)" src="/static/img/add_number.png"></image>
 						</view>
 					</view>
 				</view>
@@ -379,11 +379,6 @@
 						width:50rpx
 						height:50rpx
 						border-radius :50%
-						display:flex
-						justify-content :center
-						align-items :center
-						color:#FFFFFF
-						background-color :#00BFFF
 						position :absolute
 						bottom:5rpx
 						right:20rpx

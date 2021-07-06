@@ -77,6 +77,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/index/gasStation/order/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
