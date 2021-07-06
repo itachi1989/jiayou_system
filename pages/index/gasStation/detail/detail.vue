@@ -35,8 +35,8 @@
 				<view>搜索商品</view>
 			</view>
 		</uni-nav-bar>
-		<view style="height:300rpx">
-			<view class="topbar" :style="{height:tobarHeight +'%'}">
+		<view :style="{height:tobarHeight +'%'}" style="position:absolute">
+			<view class="topbar">
 				<view class="where">佛山市禅城区张槎街道22号中石油分站</view>
 				<view class="distance">
 					<view class="iconfont icondingwei"></view>
@@ -56,10 +56,14 @@
 						</view>
 					</picker>
 					<view class="label" style="margin-left:50rpx">升数:</view>
-					<input style="width:60rpx;background-color: #F0F0F0;border-radius: 20rpx;padding-left:20rpx"/>L
+					<input style="width:60rpx;background-color: #F0F0F0;border-radius: 20rpx;padding-left:20rpx;color: transparent;
+      text-shadow: 0 0 0 #000;"/>L
 				</view>
 			</view>
 		</view>
+		
+		<view :style="{height:tobarHeight +'%'}"></view>
+		
 		<view class="content" :style="{height:contentHeight + '%'}">
 			<scroll-view  scroll-y="true" class="left_scroll" :style="{height:scrollHeight + '%'}">
 				<view class="nav_left" >
@@ -71,13 +75,15 @@
 			</scroll-view>
 			<scroll-view  scroll-y="true" class="right_scroll" :style="{height:scrollHeight + '%'}">
 				<view class="right">
-					<view class="good_list" v-for="item in goodList">
+					<view class="good_list" v-for="(item,index) in goods.data.goodList">
 						<image class="img" :src="item.image"></image>
 						<view class="good_right">
 							<view class="name">{{item.name}}</view>
 							<view class="title">{{item.title}}</view>
 							<view class="price">￥{{item.price}}</view>
-							<view class="add">+</view>
+							<image class="sub" src="/static/img/sub.png" @click="subtract(index)"></image>
+							<view class="number">{{item.number}}</view>
+							<view class="add" @click="increment(index)">+</view>
 						</view>
 					</view>
 				</view>
@@ -85,7 +91,7 @@
 			<footbar :tobarHeight="footbarHeight" ></footbar>
 		</view>
 		<!-- 购物车 -->
-		<view class="shopcart">
+		<view class="shopcart" v-show="isSelected">
 			<view class="cart" @click="shopcartTap">
 				<image src="/static/img/shopcart.png"></image>
 				<view class="good_number">1</view>
@@ -101,6 +107,7 @@
 </template>
 
 <script>
+	import { mapState ,mapMutations} from 'vuex'
 	import uniNavBar from '@/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue'
 	import footbar from '@/component/nav/footbar.vue'
 	export default {
@@ -156,37 +163,14 @@
 					},
 				],
 				type_index:0,
-				goodList:[
-					{
-						name:'花生油',
-						image:'/static/img/cat1.jpg',
-						price:20,
-						title:'描述'
-					},
-					{
-						name:'零食',
-						image:'/static/img/cat2.jpg',
-						price:30,
-						title:'描述'
-					},
-					{
-						name:'调味料',
-						image:'/static/img/cat3.jpg',
-						price:40,
-						title:'描述'
-					},
-					{
-						name:'生鲜',
-						image:'/static/img/cat4.jpg',
-						price:50,
-						title:'描述'
-					},
-					
-				],
 				isShopcart:false,//购物车展开/收缩
 			}
 		},
 		methods: {
+			...mapMutations([
+				'increment',
+				'subtract'
+			]),
 			back(){
 				uni.navigateBack({
 					
@@ -215,6 +199,17 @@
 				})
 			}
 		},
+		computed:{
+			...mapState([
+			      'goods'
+			    ]),
+			isSelected(){
+				let list=this.$store.state.goods.data.goodList
+				return list.some((item)=>{
+					return item.number>0
+				})
+			}
+		},
 		onLoad(){
 			let that=this
 			//获取窗口宽度
@@ -223,10 +218,6 @@
 			that.windowWidth=systemInfo.windowWidth
 			that.safe_top=systemInfo.safeArea.top
 			
-			//商品列表*2
-			let goodList=that.goodList
-			that.goodList=goodList.concat(goodList)
-			console.log('goodList',that.goodList)
 			
 			//判断机型
 			switch (uni.getSystemInfoSync().platform) {
@@ -235,7 +226,7 @@
 					that.footbarHeight=7
 					break
 				case 'ios':
-					that.tobarHeight=20
+					that.tobarHeight=25
 					that.footbarHeight=20
 					break
 			}
@@ -298,7 +289,6 @@
 			.chosen
 				color:#000000
 .content
-	
 	z-index:-1
 	width:100%
 	height:60%
@@ -374,6 +364,17 @@
 						font-weight :700
 						position :absolute
 						bottom:5rpx
+					.sub
+						width:55rpx
+						height:55rpx
+						position:absolute
+						bottom:0rpx
+						right:125rpx
+					.number
+						font-size 28rpx
+						position :absolute
+						bottom:10rpx
+						right:90rpx
 					.add
 						width:50rpx
 						height:50rpx
@@ -388,8 +389,8 @@
 						right:20rpx
 						font-size :40rpx
 .shopcart
-	width:700rpx
-	height:100rpx
+	width:90vw
+	height:7vh
 	border-radius :50rpx
 	background-color :#2F4F4f
 	position :fixed

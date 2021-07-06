@@ -24,8 +24,11 @@
 				</view>
 			</view>
 		</view>
+		<!-- 占位符 -->
+		<view style="height:150rpx"></view>
 		<view class="pay">
-			
+			<view class="sum">合计<text class="price">￥16</text></view>
+			<view class="submit">立即支付</view>
 		</view>
 	</view>
 </template>
@@ -99,11 +102,31 @@
 			justify-content :space-between
 			align-items :flex-start
 .pay
-	width:100vw
-	height:200rpx
-	background-color :#ffffff
-	border-top:1rpx solid 	#C0C0C0
-    box-shadow :-10rpx 0 5rpx 	#A9A9A9
+	width:100%
+	height:150rpx
+	background-color :#FFFFFF
 	position :fixed
 	bottom:0rpx
+	box-shadow: -20px 10px 20px #A9A9A9
+	display:flex
+	justify-content :space-between
+	align-items :center
+	.sum
+		font-size :28rpx
+		font-weight :400
+		margin-left :24rpx
+		.price
+			font-size :40rpx
+			font-weight :600
+			color:#32CD32
+	.submit
+		width:350rpx
+		height:70%
+		background-color:#32CD32
+		color:#ffffff
+		display :flex
+		justify-content :center
+		align-items :center
+		border-radius :50rpx
+		margin-right:24rpx
 </style>
