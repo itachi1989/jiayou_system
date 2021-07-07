@@ -169,7 +169,8 @@
 		methods: {
 			...mapMutations([
 				'increment',
-				'subtract'
+				'subtract',
+				'footbarChange',
 			]),
 			back(){
 				uni.navigateBack({
@@ -233,6 +234,9 @@
 			that.contentHeight=92-that.tobarHeight
 			that.footbarHeight=100-that.scrollHeight
 			console.log('contentHeight',that.contentHeight)
+		},
+		mounted(){
+			this.footbarChange(0)
 		}
 	}
 </script>

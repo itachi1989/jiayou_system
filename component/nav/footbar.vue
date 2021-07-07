@@ -1,6 +1,6 @@
 <template name="footbar">
 	<view class="container" :style="{height:tobarHeight + '%'}">
-		<view class="list" v-for="(item,index) in footbarList" @click="click"
+		<view class="list" v-for="(item,index) in footbar.data.footbarList" @click="click(item)">
 			<image :src="item.image" v-show="!item.checked"></image>
 			<image :src="item.image_checked" v-show="item.checked"></image>
 			<view :style="{color:item.checked?'#1296db':''}">
@@ -24,18 +24,14 @@
 				'footbarChange'
 			]),
 			
-			click(){
+			click(item){
 				//特效
-				console.log('ascbi',this.$store.state.footbar.data)
-				// this.list[this.currentIndex].checked=false
-				// this.list[index].checked=true
-				// this.currentIndex=index
-				// console.log('index',this.list[0].checked,this.list[1].checked)
+				this.footbarChange(item.index)
 				
 				// //跳转
-				// uni.redirectTo({
-				// 	url:path
-				// })
+				uni.redirectTo({
+					url:item.path
+				})
 			}
 		},
 		computed:{

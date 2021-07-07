@@ -81,7 +81,7 @@
             "path" : "pages/index/gasStation/order/order",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "订单",
                 "enablePullDownRefresh": false
             }
             

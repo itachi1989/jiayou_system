@@ -45,7 +45,7 @@
 </template>
 
 <script>
-	import { mapState } from 'vuex'
+	import { mapState ,mapMutations} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -75,6 +75,10 @@
 			}
 		},
 		methods: {
+			...mapMutations([
+				'footbarChange'
+			]),
+			
 			//功能列表数据处理
 			deal:function(list,max){
 				let arr1=new Array()
@@ -95,8 +99,13 @@
 				'business'
 			])
 		},
-		onShow(){
-		}
+		mounted(){
+			this.footbarChange(0)
+			console.log('7777')
+		},
+		onHide(){
+			
+		},
 	}
 </script>
 
