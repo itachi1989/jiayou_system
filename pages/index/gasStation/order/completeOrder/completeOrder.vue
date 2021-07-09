@@ -1,27 +1,18 @@
 <template>
 	<view class="container">
 		<view class="content">
-			<view class="tobar">
-				<view class="item" v-for="(item,index) in tobarList" :class="{item_checked:item.checked}" @click='tobarChoose(index)'>
-					{{item.name}}
-				</view>
-			</view>
-			<!-- 当前订单 -->
-			<view class="currentOrder" v-show="currentTobar==0">
+			<view class="currentOrder">
 				<view class="title">
 					<view class="address">
 						佛山禅城九鼎店
 					</view>
 					<view class="status">
-						待支付
+						已完成
 					</view>
-				</view>
-				<view style="width:100%;overflow: hidden;">					
-					<view class="overdue"><text class="time">09:40</text>后取消订单</view>
 				</view>
 				<view class="boundary"></view>
 				<view class="goodList">
-					<view class="item">
+					<view class="item" v-for='item in 4'>
 						<image class="img" src="/static/img/cat1.jpg" mode="aspectFill"></image>
 						<view class="right">
 							<view class="left">
@@ -44,61 +35,43 @@
 					<view class="label">{{item.name}}</view>
 					<view class="data" :style="{color:item.name=='订单编号'?'#1E90FF':''}" @click="copy(item)">{{item.data}}</view>
 				</view>
-				<view class="btn">
-					<view class="cancel">取消订单</view>
-					<view class="pay">立即支付</view>
+				<view class="invoice" @click="invoice">
+					开具发票
 				</view>
 			</view>
-			<!-- 历史订单 -->
-			<view class="currentOrder" v-show="currentTobar==1">
-				<view class="title">
-					<view class="address">
-						佛山禅城九鼎店
-					</view>
-					<view class="status">
-						已完成
-					</view>
-				</view>
-				<view class="mini_list" @click="completeOrder">
-					<view class="img-list">
-						<view class="img">
-							<image src="/static/img/cat1.jpg"></image>
-							<view class="good_name">花生油</view>
-						</view>
-					</view>
-					<view class="right">
-						<view class="price">￥40.00</view>
-						<view>共1件</view>
-					</view>
-				</view>
-			</view>
+			
 		</view>
-		<footbar></footbar>
 	</view>
 </template>
 
 <script>
-	import footbar from '@/component/nav/footbar.vue'
-	import {mapMutations} from 'vuex'
 	export default {
-		components:{footbar},
 		data() {
 			return {
-				tobarList:[
-					{
-						name:'当前订单',
-						checked:false
-					},
-					{
-						name:'历史订单',
-						checked:true
-					},
-				],
-				currentTobar:1,
 				info:[
+					{
+						name:'门店名称',
+						data:'中国石油'
+					},
+					{
+						name:'门店地址',
+						data:'佛山市禅城区南海大道中',
+					},
+					{
+						name:'联系方式',
+						data:'1939249902'
+					},
 					{
 						name:'下单时间',
 						data:'2021-07-07 17:09:02'
+					},
+					{
+						name:"复制方式",
+						data:'微信支付'
+					},
+					{
+						name:"支付金额",
+						data:"￥40微信支付",
 					},
 					{
 						name:'订单编号',
@@ -109,12 +82,9 @@
 						data:'无'
 					}
 				],
-			};
+			}
 		},
-		methods:{
-			...mapMutations([
-				'footbarChange'
-			]),
+		methods: {
 			copy(item){
 				let that=this
 				if(item.name=='订单编号'){
@@ -128,20 +98,12 @@
 						})
 				}
 			},
-			tobarChoose(index){
-				this.tobarList[this.currentTobar].checked=false
-				this.tobarList[index].checked=true
-				this.currentTobar=index
-			},
-			completeOrder(){
+			invoice(){
 				uni.navigateTo({
-					url:'./completeOrder/completeOrder'
+					url:'./applyInvoice/applyInvoice'
 				})
 			}
-		},
-		mounted(){
-			this.footbarChange(1)
-		},
+		}
 	}
 </script>
 
@@ -246,63 +208,17 @@
 				font-size:24rpx
 				.label
 					color:#C0C0C0
-			.btn
-				margin-top :20rpx
-				margin-bottom:20rpx
-				display :flex
-				justify-content :flex-end
-				.cancel
-					width:150rpx
-					height:70rpx
-					box-sizing :border-box
-					border:2rpx solid #C0C0C0
-					font-size:28rpx
-					display :flex
-					align-items :center
-					justify-content :center
-					border-radius :10rpx
-				.pay
-					width:150rpx
-					height:70rpx
-					font-size:28rpx
-					color:#ffffff
-					background-color :#32CD32
-					display :flex
-					align-items :center
-					justify-content :center
-					border-radius :10rpx
-					margin-left:20rpx
-		.mini_list
-			width:100%
-			height:150rpx
-			display :flex
-			margin-top :10rpx
-			justify-content :space-between
-			.img-list
-				flex:2
-				display :flex
-				.img
-					display :flex
-					flex-direction :column
-					justify-content :center
-					align-items :center
-					image
-						width:150rpx
-						height:150rpx
-					.good_name
-						font-size :24rpx
-						color:#C0C0C0
-			.right
-				width:150rpx
-				height:100%
-				font-size :24rpx
-				color:#C0C0C0
-				display :flex
-				flex-direction :column
-				align-items :flex-end
-				justify-content :center
-				.price
-					font-size:36rpx
-					font-weight:700
-					
+				.data
+					max-width :400rpx
+	.invoice
+		width:150rpx
+		height:80rpx
+		border-radius :10rpx
+		background-color :#32CD32
+		color:#FFFFFF
+		display :flex
+		justify-content :center
+		align-items :center
+		font-size :24rpx
+		float :right
 </style>
