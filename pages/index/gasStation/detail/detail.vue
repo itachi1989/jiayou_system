@@ -215,6 +215,7 @@
 			let that=this
 			//获取窗口宽度
 			let systemInfo=uni.getSystemInfoSync()
+			console.log('systemInfo',systemInfo)
 			that.windowHeight=systemInfo.windowHeight
 			that.windowWidth=systemInfo.windowWidth
 			that.safe_top=systemInfo.safeArea.top

@@ -1,5 +1,5 @@
 <template>
-	<view class="container">
+	<view class="container" @click="test">
 		<input class="search" placeholder="搜索石油站点" placeholder-class="input_pla"/>
 		<swiper class="display_area" indicator-dots=true indicator-color=rgba(255,255,255,0.5) autoplay=true indicator-active-color=rgba(255,255,255)>
 			<swiper-item v-for="item in 3">
@@ -9,7 +9,7 @@
 		<swiper class="content_swiper" indicator-dots=true indicator-color=rgba(189,183,107)  indicator-active-color=rgba(255,222,173)>
 			<swiper-item class="content-item" v-for="table in deal(business.list,6)">
 				<view class="row" v-for="row in deal(table,3)">
-					<view class="business" v-for="item1 in row">
+					<view class="business" v-for="item1 in row" >
 						<navigator :url="item1.skip">
 							<view class="img" :style="{'background-color':item1.color}">
 								<image :src="item1.icon"></image>
@@ -41,6 +41,7 @@
 					</view>
 				</view>
 		</view>
+		<view class="wave" v-show="reaction" :style="{top:top+'px',left:left+'px'}"></view>
 	</view>
 </template>
 
@@ -71,7 +72,10 @@
 						image:'/static/img/cat4.jpg',
 						price:50,
 					},
-				]
+				],
+				reaction:false,
+				left:0,
+				top:0
 			}
 		},
 		methods: {
@@ -92,7 +96,18 @@
 					arr1.push(arr2)
 				}
 				return arr1
-			}
+			},
+			test(e){
+				console.log('offsetLeft',e.currentTarget.offsetLeft,e.currentTarget.offsetTop,'detail',e.detail.x,e.detail.y)
+				let that=this
+				this.reaction=true
+				this.left=e.detail.x
+				this.top=e.detail.y
+				setTimeout(()=>{
+					that.reaction=false
+				},1000)
+			},
+
 		},
 		computed:{
 			...mapState([
@@ -256,4 +271,32 @@
 	justify-content: space-between;
 	align-items: center;
 }
+.order-container:active{
+	background-color: #000000;
+}
+	
+.wave{
+	background-color:rgba(0,0,0,0.3);
+	position:fixed;
+	z-index: 1000;
+	transform: translate(-50%,-50%);
+	border-radius: 50%;
+	animation:onshow 0.7s
+}
+@keyframes onshow{
+	0%{
+		width:25rpx;
+		height:25rpx;
+	}
+	90%{
+		width:100rpx;
+		height:100rpx;
+	}
+	100%{
+		width:100rpx;
+		height:100rpx;
+		opacity: 0;
+	}
+}
+
 </style>
