@@ -1,5 +1,6 @@
 <template>
 	<view class="container" @click="test">
+		<loadingCar></loadingCar>
 		<input class="search" placeholder="搜索石油站点" placeholder-class="input_pla"/>
 		<swiper class="display_area" indicator-dots=true indicator-color=rgba(255,255,255,0.5) autoplay=true indicator-active-color=rgba(255,255,255)>
 			<swiper-item v-for="item in 3">
@@ -21,9 +22,11 @@
 			</swiper-item>
 		</swiper>
 		<view class="border"></view>
-		<view class="place" v-for="item in goodList">
+		<view class="place" v-for="(item,index) in goodList">
 				<view class="order-title flex ai-center">中国石油佛山禅城分站</view>
-				<view class="order-container">
+				<view class="order-container" @click="click_good(index)">
+					<!-- 点击特效 -->
+					<view class="orderContainerActive" v-show="item.checked"></view>
 					<image :src="item.image" class="sample" mode="aspectFill"></image>
 					<view class="order-right">
 						<view class="order-name">{{item.name}}</view>
@@ -41,13 +44,17 @@
 					</view>
 				</view>
 		</view>
-		<view class="wave" v-show="reaction" :style="{top:top+'px',left:left+'px'}"></view>
+		<view class="wave" v-show="reaction" :style="{top:top+safeTop+'px',left:left+'px'}"></view>
 	</view>
 </template>
 
 <script>
 	import { mapState ,mapMutations} from 'vuex'
+	import loadingCar from '@/component/loading-car/loading-car.vue'
 	export default {
+		components:{
+			loadingCar
+		},
 		data() {
 			return {
 				businessList:[],
@@ -56,31 +63,37 @@
 						name:'花生油',
 						image:'/static/img/cat1.jpg',
 						price:20,
+						checked:false
 					},
 					{
 						name:'零食',
 						image:'/static/img/cat2.jpg',
 						price:30,
+						checked:false,
 					},
 					{
 						name:'调味料',
 						image:'/static/img/cat3.jpg',
 						price:40,
+						checked:false,
 					},
 					{
 						name:'生鲜',
 						image:'/static/img/cat4.jpg',
 						price:50,
+						checked:false,
 					},
 				],
 				reaction:false,
 				left:0,
-				top:0
+				top:0,
+				safeTop:0,
 			}
 		},
 		methods: {
 			...mapMutations([
-				'footbarChange'
+				'footbarChange',
+				'showLoading'
 			]),
 			
 			//功能列表数据处理
@@ -107,7 +120,14 @@
 					that.reaction=false
 				},1000)
 			},
-
+			click_good(index){
+				let that =this
+				this.goodList[index].checked=true
+				console.log('click',this.goodList[index].checked)
+				setTimeout(()=>{
+					this.goodList[index].checked=false
+				},1000)
+			},
 		},
 		computed:{
 			...mapState([
@@ -116,7 +136,12 @@
 		},
 		mounted(){
 			this.footbarChange(0)
-			console.log('7777')
+			
+			let system=uni.getSystemInfoSync().platform
+			if(system=='ios')
+				this.safeTop=45
+				
+			this.showLoading(true)
 		},
 		onHide(){
 			
@@ -210,6 +235,7 @@
   align-items: center;
 }
 .order-container{
+  overflow: hidden;
   width:100%;
   padding:16rpx 0 24rpx 0;
   display: flex;
@@ -271,8 +297,22 @@
 	justify-content: space-between;
 	align-items: center;
 }
-.order-container:active{
-	background-color: #000000;
+.orderContainerActive{
+	position: absolute;
+	height:144rpx;
+	transform: translateX(-50%);
+	left:50%;
+	animation: clickGood 1s;
+}
+@keyframes clickGood{
+	0%{
+		width:50rpx;
+		background-color:rgba(0,0,0,0.3);
+	}
+	90%{
+		width:100%;
+		
+	}
 }
 	
 .wave{

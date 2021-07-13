@@ -195,6 +195,7 @@
 			 setTimeout(() => {  
 			      console.log('map',map.$getAppMap())  
 			       },10000)  
+			console.log('webview',this) 
 		}
 	}
 </script>

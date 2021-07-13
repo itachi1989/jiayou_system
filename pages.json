@@ -104,6 +104,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/loading/loading-car/loading-car",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
