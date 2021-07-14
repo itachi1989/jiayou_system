@@ -1,0 +1,107 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+.container .title {
+  width: 100%;
+  height: 200rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.container .invoiceInfo {
+  width: 100%;
+  font-size: 36rpx;
+  border-top: 1rpx solid #d3d3d3;
+  border-bottom: 1rpx solid #d3d3d3;
+}
+.container .invoiceInfo .row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.container .invoiceInfo .row .label {
+  width: 200rpx;
+  margin-left: 40rpx;
+  text-align: justify;
+}
+.container .invoiceInfo .row .data {
+  margin-left: 40rpx;
+  color: #808080;
+}
+.container .title_info {
+  width: 100%;
+  height: 80rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding-left: 40rpx;
+  font-size: 28rpx;
+  color: #a9a9a9;
+  background-color: #dcdcdc;
+}
+.container .content {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  font-size: 30rpx;
+}
+.container .content .row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 100rpx;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  border-bottom: 1rpx solid #dcdcdc;
+}
+.container .content .row .label {
+  width: 200rpx;
+}
+.container .content .row .radio {
+  margin-left: 40rpx;
+}
+.container .content .row .radio .radio_item {
+  margin-bottom: 10rpx;
+}
+.container .content .row:last-child {
+  border: none;
+}
+.placeholder-class {
+  padding-left: 10rpx;
+  font-size: 30rpx;
+}
+.submit {
+  width: 80%;
+  height: 80rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  background-color: #1e90ff;
+  color: #fff;
+  margin: 40rpx auto;
+  border-radius: 10rpx;
+}
+

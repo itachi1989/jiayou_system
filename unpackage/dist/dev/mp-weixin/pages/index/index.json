@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "钱包",
-  "usingComponents": {}
+  "navigationBarTitleText": "首页",
+  "usingComponents": {
+    "loading-car": "/component/loading-car/loading-car"
+  }
 }

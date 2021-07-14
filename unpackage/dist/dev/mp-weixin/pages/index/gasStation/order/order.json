@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "订单",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "footbar": "/component/nav/footbar"
+  }
+}

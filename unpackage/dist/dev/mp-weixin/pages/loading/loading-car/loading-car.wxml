@@ -1,0 +1,1 @@
+<view class="container"><image class="img" src="/static/img/loading/car.png"></image><image class="circle" src="/static/img/loading/circle.png"></image><view style="margin-top:20rpx;">正在为您拼命加载中</view></view>

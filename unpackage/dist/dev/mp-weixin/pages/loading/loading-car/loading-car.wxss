@@ -1,0 +1,83 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.container .img {
+  width: 200rpx;
+  height: 200rpx;
+  -webkit-animation: shake 1s infinite;
+          animation: shake 1s infinite;
+}
+@-webkit-keyframes shake {
+0% {
+    -webkit-transform: translate(-5rpx, -5rpx);
+            transform: translate(-5rpx, -5rpx);
+}
+25% {
+    -webkit-transform: translate(-5rpx, 5rpx);
+            transform: translate(-5rpx, 5rpx);
+}
+50% {
+    -webkit-transform: translate(5rpx, 5rpx);
+            transform: translate(5rpx, 5rpx);
+}
+75% {
+    -webkit-transform: translate(5rpx, -5rpx);
+            transform: translate(5rpx, -5rpx);
+}
+}
+@keyframes shake {
+0% {
+    -webkit-transform: translate(-5rpx, -5rpx);
+            transform: translate(-5rpx, -5rpx);
+}
+25% {
+    -webkit-transform: translate(-5rpx, 5rpx);
+            transform: translate(-5rpx, 5rpx);
+}
+50% {
+    -webkit-transform: translate(5rpx, 5rpx);
+            transform: translate(5rpx, 5rpx);
+}
+75% {
+    -webkit-transform: translate(5rpx, -5rpx);
+            transform: translate(5rpx, -5rpx);
+}
+}
+.container .circle {
+  width: 150rpx;
+  height: 150rpx;
+  -webkit-animation: rotate 2s linear infinite;
+          animation: rotate 2s linear infinite;
+}
+@-webkit-keyframes rotate {
+0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@keyframes rotate {
+0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+

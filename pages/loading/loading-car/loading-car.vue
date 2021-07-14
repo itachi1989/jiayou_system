@@ -15,7 +15,7 @@
 		methods:{
 			...mapMutations([
 				'showLoading'
-			])
+			]),
 		},
 		computed:{
 			...mapState([
@@ -25,6 +25,17 @@
 		onShow(){
 			this.showLoading(true)
 		},
+		onLoad(options){
+			console.log('options',JSON.stringify(options.url))
+			
+			//跳转
+			setTimeout(()=>{
+				uni.redirectTo({
+					url:options.url
+				})
+			},2000)
+			
+		}
 	}
 </script>
 

@@ -43,11 +43,7 @@
 					距离您2.2km
 				</view>
 				<view class="car_number">
-					<view class="label">车牌号：</view>
-					<input placeholder="请输入您的车牌号码"/>
-				</view>
-				<view class="car_number" style="border:none">
-					<view class="label">油机号:</view>
+					<view class="label">油机号：</view>
 					<picker :range="gasList" @change="gas_select" @cancel="gas_cacel">
 						<view class="gas_numer">
 							<view class="placeholder" v-show="gasIndex==0">{{gasList[gasIndex]}}</view>
@@ -55,9 +51,22 @@
 							<view class="iconfont iconxia"></view>
 						</view>
 					</picker>
-					<view class="label" style="margin-left:50rpx">升数:</view>
-					<input style="width:60rpx;background-color: #F0F0F0;border-radius: 20rpx;padding-left:20rpx;color: transparent;
-      text-shadow: 0 0 0 #000;"/>L
+					<view class="volume">
+						<view class="digit">
+							<image :src="item.checked?'/static/img/digit/front.png':'/static/img/digit/back.png'" v-for="(item,index) in construct[0]"></image>
+						</view>
+						<view class="digit" style="margin-left: 50rpx;">
+							<image :src="item.checked?'/static/img/digit/front.png':'/static/img/digit/back.png'" v-for="(item,index) in construct[1]"></image>
+						</view>
+					</view>
+				</view>
+				<view class="car_number" style="border:none">
+					<view class="label">升数:</view>
+					<view class="container">
+						<image src="/static/img/fuelcharge.png" class="img" v-on:touchmove="move" :style="{left:img_left+'px'}"></image>
+						<view class="process" :style="{width:process_width+'px'}">
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -163,7 +172,74 @@
 					},
 				],
 				type_index:0,
-				isShopcart:false,//购物车展开/收缩
+				isShopcart:false,//购物车展开/收缩,
+				img_left:55,
+				process_width:0,
+				volume:0,
+				number_one:0,
+				number_two:0,
+				construct:[
+					[
+						{
+							index:0,
+							checked:true
+						},
+						{
+							index:1,
+							checked:true
+						},
+						{
+							index:2,
+							checked:true
+						},
+						{
+							index:3,
+							checked:false
+						},
+						{
+							index:4,
+							checked:true
+						},
+						{
+							index:5,
+							checked:true
+						},
+						{
+							index:6,
+							checked:true
+						},
+					],
+					[
+						{
+							index:0,
+							checked:true
+						},
+						{
+							index:1,
+							checked:true
+						},
+						{
+							index:2,
+							checked:true
+						},
+						{
+							index:3,
+							checked:false
+						},
+						{
+							index:4,
+							checked:true
+						},
+						{
+							index:5,
+							checked:true
+						},
+						{
+							index:6,
+							checked:true
+						},
+					]
+				],
 			}
 		},
 		methods: {
@@ -198,6 +274,96 @@
 				uni.navigateTo({
 					url:"./pay/pay"
 				})
+			},
+			move(e){
+				let left=e.changedTouches[0].pageX,volume
+				if(left>=82&&left<=340){
+					this.img_left=left-30
+					this.process_width=left-85
+				}
+				volume=Math.floor((left-80)*75/258)
+				console.log(volume,parseInt(volume/10),volume%10)
+				this.translate(0,volume<10?0:parseInt(volume/10))
+				this.translate(1,volume%10)
+			},
+			translate(n,number){
+				console.log('translate',this.construct)
+				if(number==0){
+					for(let i=0;i<=6;i++){
+						if(i==3)
+							this.construct[n][i].checked=false
+						else this.construct[n][i].checked=true
+					}
+				}
+				if(number==1){
+					for(let i=0;i<=6;i++){
+						if(i==2||i==5)
+							this.construct[n][i].checked=true
+						else
+							this.construct[n][i].checked=false
+					}
+				}
+				if(number==2){
+					for(let i=0;i<=6;i++){
+						if(i==1||i==5)
+							this.construct[n][i].checked=false
+						else
+							this.construct[n][i].checked=true
+					}
+				}
+				if(number==3){
+					for(let i=0;i<=6;i++){
+						if(i==1||i==4)
+							this.construct[n][i].checked=false
+						else
+							this.construct[n][i].checked=true
+					}
+				}
+				if(number==4){
+					for(let i=0;i<=6;i++){
+						if(i==0||i==4||i==6)
+							this.construct[n][i].checked=false
+						else
+							this.construct[n][i].checked=true
+					}
+				}
+				if(number==5){
+					for(let i=0;i<=6;i++){
+						if(i==2||i==4)
+							this.construct[n][i].checked=false
+						else
+							this.construct[n][i].checked=true
+					}
+				}
+				if(number==6){
+					for(let i=0;i<=6;i++){
+						if(i==2)
+							this.construct[n][i].checked=false
+						else
+							this.construct[n][i].checked=true
+					}
+				}
+				if(number==7){
+					for(let i=0;i<=6;i++){
+						if(i==0||i==2||i==5)
+							this.construct[n][i].checked=true
+						else
+							this.construct[n][i].checked=false
+					}
+				}
+				if(number==8){
+					for(let i=0;i<=6;i++){
+							this.construct[n][i].checked=true
+					}
+				}
+				if(number==9){
+					for(let i=0;i<=6;i++){
+						if(i==4)
+							this.construct[n][i].checked=false
+						else
+							this.construct[n][i].checked=true
+					}
+				}
 			}
 		},
 		computed:{
@@ -238,6 +404,9 @@
 		},
 		mounted(){
 			this.footbarChange(0)
+			
+			this.translate(0,0)
+			this.translate(1,0)
 		}
 	}
 </script>
@@ -282,9 +451,69 @@
 		display :flex
 		align-items :center
 		border-bottom :2rpx solid 	#BEBEBE
+		.volume
+			width:200rpx
+			height:80rpx
+			background-color :#000000
+			margin-left:70rpx
+			border-radius :10rpx
+			box-sizing :border-box
+			padding-left:45rpx
+			.digit
+				width:60rpx
+				height:80rpx
+				position :absolute
+				overflow :hidden
+				image
+					width:30rpx
+					height: 6rpx
+					position:absolute
+				image:nth-child(1)
+					left:15rpx
+				image:nth-child(2)
+					left:-2rpx
+					top:18rpx
+					transform:rotateZ(90deg);
+				image:nth-child(3)
+					left:30rpx
+					top:18rpx
+					transform:rotateZ(90deg);
+				image:nth-child(4)
+					left:15rpx
+					top:37rpx
+				image:nth-child(5)
+					left:-2rpx
+					top:55rpx
+					transform:rotateZ(90deg);
+				image:nth-child(6)
+					left:30rpx
+					top:55rpx
+					transform:rotateZ(90deg);
+				image:nth-child(7)
+					left:15rpx
+					top:72rpx
 		.label
 			font-size :1rem
 			margin-right :10rpx
+		.container
+			width:250px
+			height:40rpx
+			border-radius :10rpx
+			background-color :#F5F5F5
+			margin-left :20rpx
+		.img
+			width:150rpx
+			height:150rpx
+			transform :translate(-15rpx,-30rpx)
+			position :absolute
+			z-index:10
+		.process
+			height:40rpx
+			border-radius :10rpx
+			background-color :	#FFD700
+			display :flex
+			align-items :center
+			position :absolute
 		.gas_numer
 			width:200rpx
 			display :flex

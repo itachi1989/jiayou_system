@@ -1,0 +1,1 @@
+<view container="{{true}}"><image class="img" src="/static/img/loading/car.png"></image></view>

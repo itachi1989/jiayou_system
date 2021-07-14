@@ -1,6 +1,5 @@
 <template>
 	<view class="container" @click="test">
-		<loadingCar></loadingCar>
 		<input class="search" placeholder="搜索石油站点" placeholder-class="input_pla"/>
 		<swiper class="display_area" indicator-dots=true indicator-color=rgba(255,255,255,0.5) autoplay=true indicator-active-color=rgba(255,255,255)>
 			<swiper-item v-for="item in 3">
@@ -11,11 +10,9 @@
 			<swiper-item class="content-item" v-for="table in deal(business.list,6)">
 				<view class="row" v-for="row in deal(table,3)">
 					<view class="business" v-for="item1 in row" >
-						<navigator :url="item1.skip">
-							<view class="img" :style="{'background-color':item1.color}">
-								<image :src="item1.icon"></image>
-							</view>
-						</navigator>
+						<view class="img" :style="{'background-color':item1.color}" @click="skip(item1.skip)">
+							<image :src="item1.icon"></image>
+						</view>
 						<view>{{item1.name}}</view>
 					</view>
 				</view>
@@ -111,7 +108,6 @@
 				return arr1
 			},
 			test(e){
-				console.log('offsetLeft',e.currentTarget.offsetLeft,e.currentTarget.offsetTop,'detail',e.detail.x,e.detail.y)
 				let that=this
 				this.reaction=true
 				this.left=e.detail.x
@@ -123,11 +119,15 @@
 			click_good(index){
 				let that =this
 				this.goodList[index].checked=true
-				console.log('click',this.goodList[index].checked)
 				setTimeout(()=>{
 					this.goodList[index].checked=false
 				},1000)
 			},
+			skip(url){
+				uni.navigateTo({
+					url:'/pages/loading/loading-car/loading-car?url='+url
+				})
+			}
 		},
 		computed:{
 			...mapState([

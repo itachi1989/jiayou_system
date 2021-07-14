@@ -146,7 +146,7 @@
 			},
 			goDetail(){
 				uni.navigateTo({
-					url:'./detail/detail'
+					url:"/pages/loading/loading-car/loading-car?url=/pages/index/gasStation/detail/detail"
 				})
 			}
 		},

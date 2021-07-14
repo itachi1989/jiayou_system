@@ -1,10 +1,18 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/index/money/money/money",
-    "pages/index/money/money/charge/charge/charge",
-    "pages/index/bank/bank",
-    "pages/index/bank/addBank/addBank"
+    "pages/index/purse/index",
+    "pages/index/purse/money/money/money",
+    "pages/index/purse/money/money/charge/charge/charge",
+    "pages/index/purse/bank/bank",
+    "pages/index/purse/bank/addBank/addBank",
+    "pages/index/gasStation/gasStation",
+    "pages/index/gasStation/detail/detail",
+    "pages/index/gasStation/detail/pay/pay",
+    "pages/index/gasStation/order/order",
+    "pages/index/gasStation/order/completeOrder/completeOrder",
+    "pages/index/gasStation/order/completeOrder/applyInvoice/applyInvoice",
+    "pages/loading/loading-car/loading-car"
   ],
   "subPackages": [],
   "window": {

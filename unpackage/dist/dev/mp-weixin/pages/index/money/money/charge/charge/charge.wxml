@@ -1,1 +1,0 @@
-<view class="container"><view class="content"><view class="amount">充值金额</view><view class="input"><view>¥</view><input/></view></view><view class="charge">充值</view></view>

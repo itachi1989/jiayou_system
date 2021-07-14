@@ -1,0 +1,298 @@
+@font-face {
+  font-family: 'iconfont';  /* Project id 2385289 */
+  src: url('https://at.alicdn.com/t/font_2385289_eg2bb3ka51c.woff2?t=1622538200305') format('woff2'),
+       url('https://at.alicdn.com/t/font_2385289_eg2bb3ka51c.woff?t=1622538200305') format('woff'),
+       url('https://at.alicdn.com/t/font_2385289_eg2bb3ka51c.ttf?t=1622538200305') format('truetype');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.iconxia:before {
+  content: "\e60b";
+}
+.icondaohang:before {
+  content: "\e797";
+}
+.icondianhua:before {
+  content: "\e691";
+}
+.iconstar:before {
+  content: "\e698";
+}
+.iconlinedesign-04:before {
+  content: "\e66e";
+}
+.icondingwei:before {
+  content: "\e62c";
+}
+.iconclose:before {
+  content: "\e6d5";
+}
+.iconyoujiantou1-copy:before {
+  content: "\e666";
+}
+.iconyoujiantou1:before {
+  content: "\e63e";
+}
+.iconarrow-right:before {
+  content: "\e665";
+}
+.iconsousuo:before {
+  content: "\e60a";
+}
+.iconxiajiantou:before {
+  content: "\e615";
+}
+.iconyoujiantou:before {
+  content: "\e637";
+}
+.iconzuojiantou:before {
+  content: "\e604";
+}
+page{
+	background-color:#F2F2F2;
+}
+.container{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+}
+.content{
+	margin-top:50rpx;
+	width:90%;
+	height:300rpx;
+	background-color: #ffffff;
+	border-radius: 10rpx;
+}
+.amount{
+	height:100rpx;
+	margin-left:50rpx;
+	margin-top:20rpx;
+}
+.input{
+	margin-left:20rpx;
+	font-weight: 600;
+	font-size: 60rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.input input{
+	margin-left:10rpx;
+	-webkit-box-flex:2;
+	-webkit-flex:2;
+	        flex:2
+}
+.charge{
+	margin-top: 70rpx;
+	width:90%;
+	height:75rpx;
+	background-color:#007AFF;
+	border-radius: 10rpx;
+	color:#ffffff;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.charge_container{
+	margin-top: 30rpx;
+	width:90%;
+	background-color:#ffffff;
+	border-radius: 10rpx;
+}
+.charge_list{
+	width:100%;
+	height:400rpx;
+	display: table;
+}
+.row{
+	display: table-row;
+}
+.cell{
+	display: table-cell;
+	vertical-align: middle;
+}
+.charge_item{
+	width:200rpx;
+	height:140rpx;
+	border: 6rpx solid #E0E0E0;
+	border-radius: 20rpx;
+	margin:0 auto;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	color:#E0E0E0;
+	font-size: 50rpx;
+}
+.checked{
+	border:6rpx solid #0000E3;
+	color:#0000E3;
+}
+.border{
+	width:95%;
+	height:1rpx;
+	background-color:#E0E0E0;
+	margin:0 auto;
+}
+.pay_way{
+	width:100%;
+	padding:20rpx 20rpx;
+	box-sizing: border-box;
+}
+.wechat{
+	width:100%;
+	height:70rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	font-weight:300;
+	margin-top: 20rpx;
+}
+.img{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+}
+.img image{
+	width:50rpx;
+	height:50rpx;
+	margin-right: 10rpx;
+}
+.radio{
+	width:50rpx;
+	height:50rpx;
+}
+.iconyoujiantou1{
+	color:	#D3D3D3;
+}
+.virtualise{
+	width:100vw;
+	height:100vh;
+	position: absolute;
+	background-color: rgba(0,0,0,.5);
+}
+.bank_tc{
+	width:80%;
+	height:600rpx;
+	background-color: #ffffff;
+	border-radius: 20rpx;
+	position: absolute;
+	top:50%;
+	left:50%;
+	-webkit-transform: translate(-50%,-50%);
+	        transform: translate(-50%,-50%);
+	overflow: hidden;
+}
+.iconclose{
+	color:#bfbfbf;
+	font-size: 50rpx;
+	position: absolute;
+	top:10rpx;
+	right:10rpx;
+}
+.bank_list{
+	width:80%;
+	position: absolute;
+	top:50%;
+	left:50%;
+	-webkit-transform: translate(-50%,-50%);
+	        transform: translate(-50%,-50%);
+}
+.bank_list > view{
+	border-bottom: 1rpx solid 	#D3D3D3;
+}
+.bank_item{
+	width:100%;
+	height:90rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.bank_item:first-child{
+	border-top: 1rpx solid #D3D3D3;
+}
+.bank_item view{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: start;
+	-webkit-justify-content: flex-start;
+	        justify-content: flex-start;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.sure{
+	width:80%;
+	height:70rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	color:#ffffff;
+	background-color: #007AFF;
+	border-radius: 10rpx;
+	position: absolute;
+	bottom:20rpx;
+	left:50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+}
+.sure_active{
+	background-color:#191970;
+}
+.bank_pay{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+
