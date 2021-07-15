@@ -1,126 +1,129 @@
 <template>
-	<view class="container" :style="{width:windowWidth + 'px',height: windowHeight + 'px'}">
-		<!-- 购物车 -->
-		<view class="virtualise" v-show="isShopcart" @click="shopcartTap()">
-			<view class="carList" @click.native.stop>
-				<view class="top">
-					<view style="color:	#808080;font-size: 28rpx;margin-left: 12rpx;">已选商品</view>
-					<view style="color:#C0C0C0;font-size:26rpx;margin-right: 24rpx;display:flex;align-items: center;">
-						<image src="/static/img/del.png" style="width:30rpx;height:30rpx"></image>
-						清空购物车
-					</view>
-				</view>
-				<view class="goods_container">
-					<view class="good_list" v-for="item in 3">
-						<image class="img" src="/static/img/cat1.jpg"></image>
-						<view class="center">
-							<view>花生油</view>
-							<view style="margin-top: 30rpx;">￥14</view>
-						</view>
-						<view class="right">
-							<image class="btn" src="/static/img/sub_car.png"></image>
-							<view class="number">1</view>
-							<image class="btn" src="/static/img/add_car.png"></image>
+	<clickview>
+		<view class="container" :style="{width:windowWidth + 'px',height: windowHeight + 'px'}">
+			<!-- 购物车 -->
+			<view class="virtualise" v-show="isShopcart" @click="shopcartTap()">
+				<view class="carList" @click.native.stop>
+					<view class="top">
+						<view style="color:	#808080;font-size: 28rpx;margin-left: 12rpx;">已选商品</view>
+						<view style="color:#C0C0C0;font-size:26rpx;margin-right: 24rpx;display:flex;align-items: center;">
+							<image src="/static/img/del.png" style="width:30rpx;height:30rpx"></image>
+							清空购物车
 						</view>
 					</view>
+					<view class="goods_container">
+						<view class="good_list" v-for="item in shopCarList">
+							<image class="img" :src="item.image"></image>
+							<view class="center">
+								<view>{{item.name}}</view>
+								<view style="margin-top: 30rpx;">￥{{item.price}}</view>
+							</view>
+							<view class="right">
+								<image class="btn" src="/static/img/sub_car.png" @click="subtract(item.index)"></image>
+								<view class="number">{{item.number}}</view>
+								<image class="btn" src="/static/img/add_car.png" @click="increment(item.index)"></image>
+							</view>
+						</view>
+					</view>
+					<view class="bottom_block"></view>
 				</view>
-				<view class="bottom_block"></view>
+			</view>
+			<!-- 占位符 -->
+			<view :style="{height: safe_top + 'px'}"></view>
+			<uni-nav-bar left-icon="back" @clickLeft="back" fixed=true >
+				<view class="search">
+					<view class="iconfont iconsousuo"></view>
+					<view>搜索商品</view>
+				</view>
+			</uni-nav-bar>
+			<view :style="{height:tobarHeight +'%'}" style="position:absolute">
+				<view class="topbar">
+					<view class="where">佛山市禅城区张槎街道22号中石油分站</view>
+					<view class="distance">
+						<view class="iconfont icondingwei"></view>
+						距离您2.2km
+					</view>
+					<view class="car_number">
+						<view class="label">油机号：</view>
+						<picker :range="gasList" @change="gas_select" @cancel="gas_cacel">
+							<view class="gas_numer">
+								<view class="placeholder" v-show="gasIndex==0">{{gasList[gasIndex]}}</view>
+								<view class="chosen" v-show="gasIndex>0">{{gasList[gasIndex]}}</view>
+								<view class="iconfont iconxia"></view>
+							</view>
+						</picker>
+						<view class="volume">
+							<view class="digit">
+								<image :src="item.checked?'/static/img/digit/front.png':'/static/img/digit/back.png'" v-for="(item,index) in construct[0]"></image>
+							</view>
+							<view class="digit" style="margin-left: 50rpx;">
+								<image :src="item.checked?'/static/img/digit/front.png':'/static/img/digit/back.png'" v-for="(item,index) in construct[1]"></image>
+							</view>
+						</view>
+					</view>
+					<view class="car_number" style="border:none">
+						<view class="label">升数:</view>
+						<view class="container">
+							<image src="/static/img/fuelcharge.png" class="img" v-on:touchmove="move" :style="{left:img_left+'px'}"></image>
+							<view class="process" :style="{width:process_width+'px'}">
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			
+			<view :style="{height:tobarHeight +'%'}"></view>
+			
+			<view class="content" :style="{height:contentHeight + '%'}">
+				<scroll-view  scroll-y="true" class="left_scroll" :style="{height:scrollHeight + '%'}">
+					<view class="nav_left" >
+						<view class="nav_item" :class="[item.checked?'nav_chosen':'',index+1==type_index?'nav_chosen_top':'',index-1==type_index?'nav_chosen_bottom':'']" v-for="(item,index) in good_type" @tap="type_choose(index)" >
+							<image :src="item.img"></image>
+							<view>{{item.name}}</view>
+						</view>
+					</view>
+				</scroll-view>
+				<scroll-view  scroll-y="true" class="right_scroll" :style="{height:scrollHeight + '%'}">
+					<view class="right">
+						<view class="good_list" v-for="(item,index) in goods.data.goodList">
+							<image class="img" :src="item.image"></image>
+							<view class="good_right">
+								<view class="name">{{item.name}}</view>
+								<view class="title">{{item.title}}</view>
+								<view class="price">￥{{item.price}}</view>
+								<image class="sub" src="/static/img/sub.png" @click="subtract(index)"></image>
+								<view class="number">{{item.number}}</view>
+								<image class="add" @click="increment(index)" src="/static/img/add_number.png"></image>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+				<footbar :tobarHeight="footbarHeight" ></footbar>
+			</view>
+			<!-- 购物车 -->
+			<view class="shopcart" v-show="isSelected">
+				<view class="cart" @click="shopcartTap">
+					<image src="/static/img/shopcart.png"></image>
+					<view class="good_number">{{count}}</view>
+					<view class="price">
+						<text>￥</text>{{sum}}
+					</view>
+				</view>
+				<view class="pay" @click="pay">
+					结算
+				</view>
 			</view>
 		</view>
-		<!-- 占位符 -->
-		<view :style="{height: safe_top + 'px'}"></view>
-		<uni-nav-bar left-icon="back" @clickLeft="back" fixed=true >
-			<view class="search">
-				<view class="iconfont iconsousuo"></view>
-				<view>搜索商品</view>
-			</view>
-		</uni-nav-bar>
-		<view :style="{height:tobarHeight +'%'}" style="position:absolute">
-			<view class="topbar">
-				<view class="where">佛山市禅城区张槎街道22号中石油分站</view>
-				<view class="distance">
-					<view class="iconfont icondingwei"></view>
-					距离您2.2km
-				</view>
-				<view class="car_number">
-					<view class="label">油机号：</view>
-					<picker :range="gasList" @change="gas_select" @cancel="gas_cacel">
-						<view class="gas_numer">
-							<view class="placeholder" v-show="gasIndex==0">{{gasList[gasIndex]}}</view>
-							<view class="chosen" v-show="gasIndex>0">{{gasList[gasIndex]}}</view>
-							<view class="iconfont iconxia"></view>
-						</view>
-					</picker>
-					<view class="volume">
-						<view class="digit">
-							<image :src="item.checked?'/static/img/digit/front.png':'/static/img/digit/back.png'" v-for="(item,index) in construct[0]"></image>
-						</view>
-						<view class="digit" style="margin-left: 50rpx;">
-							<image :src="item.checked?'/static/img/digit/front.png':'/static/img/digit/back.png'" v-for="(item,index) in construct[1]"></image>
-						</view>
-					</view>
-				</view>
-				<view class="car_number" style="border:none">
-					<view class="label">升数:</view>
-					<view class="container">
-						<image src="/static/img/fuelcharge.png" class="img" v-on:touchmove="move" :style="{left:img_left+'px'}"></image>
-						<view class="process" :style="{width:process_width+'px'}">
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
-		
-		<view :style="{height:tobarHeight +'%'}"></view>
-		
-		<view class="content" :style="{height:contentHeight + '%'}">
-			<scroll-view  scroll-y="true" class="left_scroll" :style="{height:scrollHeight + '%'}">
-				<view class="nav_left" >
-					<view class="nav_item" :class="[item.checked?'nav_chosen':'',index+1==type_index?'nav_chosen_top':'',index-1==type_index?'nav_chosen_bottom':'']" v-for="(item,index) in good_type" @tap="type_choose(index)" >
-						<image :src="item.img"></image>
-						<view>{{item.name}}</view>
-					</view>
-				</view>
-			</scroll-view>
-			<scroll-view  scroll-y="true" class="right_scroll" :style="{height:scrollHeight + '%'}">
-				<view class="right">
-					<view class="good_list" v-for="(item,index) in goods.data.goodList">
-						<image class="img" :src="item.image"></image>
-						<view class="good_right">
-							<view class="name">{{item.name}}</view>
-							<view class="title">{{item.title}}</view>
-							<view class="price">￥{{item.price}}</view>
-							<image class="sub" src="/static/img/sub.png" @click="subtract(index)"></image>
-							<view class="number">{{item.number}}</view>
-							<image class="add" @click="increment(index)" src="/static/img/add_number.png"></image>
-						</view>
-					</view>
-				</view>
-			</scroll-view>
-			<footbar :tobarHeight="footbarHeight" ></footbar>
-		</view>
-		<!-- 购物车 -->
-		<view class="shopcart" v-show="isSelected">
-			<view class="cart" @click="shopcartTap">
-				<image src="/static/img/shopcart.png"></image>
-				<view class="good_number">1</view>
-				<view class="price">
-					<text>￥</text>14
-				</view>
-			</view>
-			<view class="pay" @click="pay">
-				结算
-			</view>
-		</view>
-	</view>
+	</clickview>
 </template>
 
 <script>
 	import { mapState ,mapMutations} from 'vuex'
 	import uniNavBar from '@/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue'
 	import footbar from '@/component/nav/footbar.vue'
+	import clickview from '@/component/clickview/clickview.vue'
 	export default {
-		components: {uniNavBar,footbar},
+		components: {uniNavBar,footbar,clickview},
 		data() {
 			return {
 				tobarHeight:10,
@@ -130,6 +133,7 @@
 				windowWidth:0,
 				scrollHeight:93,
 				safe_top:0,
+				safeTop:0,//点击特效的ios填充高度
 				gasList:[
 					'请选择',
 					'#90',
@@ -238,7 +242,7 @@
 							index:6,
 							checked:true
 						},
-					]
+					],
 				],
 			}
 		},
@@ -272,20 +276,27 @@
 			},
 			pay(){
 				uni.navigateTo({
-					url:"./pay/pay"
+					url:"/pages/loading/loading-car/loading-car?url=/pages/index/gasStation/detail/pay/pay"
 				})
 			},
 			move(e){
-				let left=e.changedTouches[0].pageX,volume
-				if(left>=82&&left<=340){
-					this.img_left=left-30
-					this.process_width=left-85
-				}
-				volume=Math.floor((left-80)*75/258)
-				console.log(volume,parseInt(volume/10),volume%10)
-				this.translate(0,volume<10?0:parseInt(volume/10))
-				this.translate(1,volume%10)
-			},
+				if(this.gasIndex==0){//如果没选机油类型则跳出弹窗
+					uni.showModal({
+						title:'提示',
+						content:'请选择机油号'
+					})
+				}else{
+					let left=e.changedTouches[0].pageX,volume
+						if(left>=82&&left<=340){
+							this.img_left=left-30
+							this.process_width=left-85
+						}
+						volume=Math.floor((left-80)*75/258)
+						this.translate(0,volume<10?0:parseInt(volume/10))
+						this.translate(1,volume%10)
+						this.volume=volume
+					}
+				},
 			translate(n,number){
 				console.log('translate',this.construct)
 				if(number==0){
@@ -364,7 +375,8 @@
 							this.construct[n][i].checked=true
 					}
 				}
-			}
+			},
+					
 		},
 		computed:{
 			...mapState([
@@ -372,9 +384,53 @@
 			    ]),
 			isSelected(){
 				let list=this.$store.state.goods.data.goodList
-				return list.some((item)=>{
+				return (list.some((item)=>{
 					return item.number>0
+				})||this.volume>0)
+			},
+			count(){
+				let list=this.$store.state.goods.data.goodList,num=0
+				list.forEach((item)=>{
+					num+=item.number
 				})
+				if(this.volume>0){//如果有选汽油则商品加1
+					num++
+				}
+				return num
+			},
+			sum(){
+				let list=this.$store.state.goods.data.goodList,sum=0
+				list.forEach((item)=>{
+					sum+=item.number*item.price
+				})
+				if(this.volume>0){
+					sum=this.volume*7
+				}
+				return sum
+			},
+			shopCarList(){
+				let shopcar=[]
+				let that=this, list=this.$store.state.goods.data.goodList
+				if(this.volume>0){
+						shopcar.push({
+						name:that.gasList[that.gasIndex]+" "+this.volume+'升',
+						price:this.volume*7,
+						image:'/static/img/qiyou.png',
+						number:1
+					})
+				}
+				list.forEach((item)=>{
+					if(item.number>0){
+							shopcar.push({
+							name:item.name,
+							price:item.price*item.number,
+							image:item.image,
+							number:item.number,
+							index:item.index
+						})
+					}
+				})
+				return shopcar
 			}
 		},
 		onLoad(){
@@ -403,6 +459,10 @@
 			console.log('contentHeight',that.contentHeight)
 		},
 		mounted(){
+			let system=uni.getSystemInfoSync().platform
+			if(system=='ios')
+				this.safeTop=45
+			
 			this.footbarChange(0)
 			
 			this.translate(0,0)

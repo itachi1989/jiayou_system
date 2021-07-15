@@ -1,84 +1,90 @@
 <template>
-	<view class="container">
-		<view class="topBar" :style="{top:marginTop + 'rpx'}">
-			<view class="topType" :class="[item.checked?'topType_chosen':'']" v-for="(item,index) in topbarList" @click="choose_topbar(index)">
-				{{item.name}}
-				<view class="chosen_line" v-show="item.checked"></view>
-			</view>
-			<view class="search">
-				<view class="iconfont">&#xe60a;</view>
-				<view style="color:	#D3D3D3;margin-left: 10rpx;">搜索</view>
-			</view>
-		</view>
-		<view v-show="topbarList[0].checked==true" class="type">
-			<map class="map" id="map1" ref="map1" enable-zoom=true enable-scroll=true :style="{marginTop:170 +'rpx'}" :markers="markers" :latitude="yourLatitude" :longitude="yourLongitude"></map>
-			<view class="gas_list" v-for="item in markers">
-				<view class="left">
-					<view class="name">
-						<view class="iconfont iconstar"></view>中国石化广东佛山南海桂城分局
-					</view>
-					<view class="address">
-						<view class="iconfont icondingwei"></view>
-						广东省佛山市南海区狮山镇广云路33号大坏蛋还u的话好低啊u
-					</view>
-					<view class="address">
-						<view class="iconfont iconlinedesign-04"></view>
-						10:00-23:00
-					</view>
-					<view class="status">门店营业</view>
+	<view>
+		<clickview class="container">
+			<view class="topBar" :style="{top:marginTop + 'rpx'}">
+				<view class="topType" :class="[item.checked?'topType_chosen':'']" v-for="(item,index) in topbarList" @click="choose_topbar(index)">
+					{{item.name}}
+					<view class="chosen_line" v-show="item.checked"></view>
 				</view>
-				<view class="vertical-border"></view>
-				<view class="right">
-					<view class="go" @tap="goDetail">去看看</view>
-					<view class="distance">距离2.3km</view>
-					<view class="img_container">
-						<view class="img ">
-							<view class="iconfont icondianhua"></view>
-						</view>
-						<view class="img" style="margin-left:15rpx" @tap="guide(item.longitude,item.latitude)">
-							<view class="iconfont icondaohang"></view>
-						</view>
-					</view>
+				<view class="search">
+					<view class="iconfont">&#xe60a;</view>
+					<view style="color:	#D3D3D3;margin-left: 10rpx;">搜索</view>
 				</view>
 			</view>
-		</view>
-		<view class="type" :style="{marginTop:marginTop2 + 100 + 'rpx'}">
-			<view class="gas_list" v-for="item in 3" v-show="topbarList[1].checked" >
-				<view class="left">
-					<view class="name">
-						<view class="iconfont iconstar"></view>中国石化广东佛山南海桂城分局
-					</view>
-					<view class="address">
-						<view class="iconfont icondingwei"></view>
-						广东省佛山市南海区狮山镇广云路33号大坏蛋还u的话好低啊u
-					</view>
-					<view class="address">
-						<view class="iconfont iconlinedesign-04"></view>
-						10:00-23:00
-					</view>
-					<view class="status">门店营业</view>
-				</view>
-				<view class="vertical-border"></view>
-				<view class="right">
-					<view class="go" @tap="goDetail">去看看</view>
-					<view class="distance">距离2.3km</view>
-					<view class="img_container">
-						<view class="img ">
-							<view class="iconfont icondianhua"></view>
+			<view v-show="topbarList[0].checked==true" class="type">
+				<map class="map" id="map1" ref="map1" enable-zoom=true enable-scroll=true :style="{marginTop:170 +'rpx'}" :markers="markers" :latitude="yourLatitude" :longitude="yourLongitude"></map>
+				<view class="gas_list" v-for="item in markers">
+					<view class="left">
+						<view class="name">
+							<view class="iconfont iconstar"></view>中国石化广东佛山南海桂城分局
 						</view>
-						<view class="img" style="margin-left:15rpx">
-							<view class="iconfont icondaohang"></view>
-							
+						<view class="address">
+							<view class="iconfont icondingwei"></view>
+							广东省佛山市南海区狮山镇广云路33号大坏蛋还u的话好低啊u
+						</view>
+						<view class="address">
+							<view class="iconfont iconlinedesign-04"></view>
+							10:00-23:00
+						</view>
+						<view class="status">门店营业</view>
+					</view>
+					<view class="vertical-border"></view>
+					<view class="right">
+						<view class="go" @tap="goDetail">去看看</view>
+						<view class="distance">距离2.3km</view>
+						<view class="img_container">
+							<view class="img ">
+								<view class="iconfont icondianhua"></view>
+							</view>
+							<view class="img" style="margin-left:15rpx" @tap="guide(item.longitude,item.latitude)">
+								<view class="iconfont icondaohang"></view>
+							</view>
 						</view>
 					</view>
 				</view>
 			</view>
-		</view>
+			<view class="type" :style="{marginTop:marginTop2 + 100 + 'rpx'}">
+				<view class="gas_list" v-for="item in 3" v-show="topbarList[1].checked" >
+					<view class="left">
+						<view class="name">
+							<view class="iconfont iconstar"></view>中国石化广东佛山南海桂城分局
+						</view>
+						<view class="address">
+							<view class="iconfont icondingwei"></view>
+							广东省佛山市南海区狮山镇广云路33号大坏蛋还u的话好低啊u
+						</view>
+						<view class="address">
+							<view class="iconfont iconlinedesign-04"></view>
+							10:00-23:00
+						</view>
+						<view class="status">门店营业</view>
+					</view>
+					<view class="vertical-border"></view>
+					<view class="right">
+						<view class="go" @tap="goDetail">去看看</view>
+						<view class="distance">距离2.3km</view>
+						<view class="img_container">
+							<view class="img ">
+								<view class="iconfont icondianhua"></view>
+							</view>
+							<view class="img" style="margin-left:15rpx">
+								<view class="iconfont icondaohang"></view>
+								
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</clickview>
 	</view>
 </template>
 
 <script>
+	import clickview from '@/component/clickview/clickview.vue'
 	export default {
+		components:{
+			clickview
+		},
 		data() {
 			return {
 				topbarList:[
@@ -123,7 +129,8 @@
 						content:"anciol",
 						iconPath:'/static/img/gas.png',
 					},
-				]
+				],
+				safeTop:0,
 			};
 		},
 		methods:{
@@ -196,6 +203,8 @@
 			      console.log('map',map.$getAppMap())  
 			       },10000)  
 			console.log('webview',this) 
+		},
+		mounted(){
 		}
 	}
 </script>

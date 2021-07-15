@@ -1,5 +1,5 @@
 <template>
-	<view class="container">
+	<clickview class="container">
 		<view class="title">
 			增值税电子普通发票
 		</view>
@@ -56,11 +56,15 @@
 		<view class="submit">
 			提交
 		</view>
-	</view>
+	</clickview>
 </template>
 
 <script>
+	import clickview from '@/component/clickview/clickview.vue'
 	export default {
+		components:{
+			clickview
+		},
 		data() {
 			return {
 				invoiceInfo:[

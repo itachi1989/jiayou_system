@@ -1,5 +1,5 @@
 <template>
-	<view class="container">
+	<clickview class="container">
 		<view class="content">
 			<view class="currentOrder">
 				<view class="title">
@@ -39,13 +39,16 @@
 					开具发票
 				</view>
 			</view>
-			
 		</view>
-	</view>
+	</clickview>
 </template>
 
 <script>
+	import clickview from '@/component/clickview/clickview.vue'
 	export default {
+		components:{
+			clickview
+		},
 		data() {
 			return {
 				info:[
@@ -100,7 +103,7 @@
 			},
 			invoice(){
 				uni.navigateTo({
-					url:'./applyInvoice/applyInvoice'
+					url:'/pages/loading/loading-car/loading-car?url=/pages/index/gasStation/order/completeOrder/applyInvoice/applyInvoice'
 				})
 			}
 		}

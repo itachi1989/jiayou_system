@@ -7,6 +7,7 @@ const state={
 				price:20,
 				title:'描述',
 				number:0,
+				index:0,
 			},
 			{
 				name:'零食',
@@ -14,6 +15,7 @@ const state={
 				price:30,
 				title:'描述',
 				number:0,
+				index:1,
 			},
 			{
 				name:'调味料',
@@ -21,6 +23,7 @@ const state={
 				price:40,
 				title:'描述',
 				number:0,
+				index:2,
 			},
 			{
 				name:'生鲜',
@@ -28,6 +31,7 @@ const state={
 				price:50,
 				title:'描述',
 				number:0,
+				index:3,
 			},
 			
 		]

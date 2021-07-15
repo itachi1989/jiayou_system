@@ -1,5 +1,5 @@
 <template>
-	<view class="container">
+	<clickview class="container">
 		<view class="content">
 			<view class="tobar">
 				<view class="item" v-for="(item,index) in tobarList" :class="{item_checked:item.checked}" @click='tobarChoose(index)'>
@@ -74,14 +74,15 @@
 			</view>
 		</view>
 		<footbar></footbar>
-	</view>
+	</clickview>
 </template>
 
 <script>
 	import footbar from '@/component/nav/footbar.vue'
+	import clickview from '@/component/clickview/clickview.vue'
 	import {mapMutations} from 'vuex'
 	export default {
-		components:{footbar},
+		components:{footbar,clickview},
 		data() {
 			return {
 				tobarList:[
@@ -135,7 +136,7 @@
 			},
 			completeOrder(){
 				uni.navigateTo({
-					url:'./completeOrder/completeOrder'
+					url:'/pages/loading/loading-car/loading-car?url=/pages/index/gasStation/order/completeOrder/completeOrder'
 				})
 			}
 		},

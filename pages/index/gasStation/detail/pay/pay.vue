@@ -1,5 +1,5 @@
 <template>
-	<view class="container">
+	<clickview class="container">
 		<view class="info">
 			<view class="name">
 				佛山禅城九鼎店
@@ -30,15 +30,19 @@
 			<view class="sum">合计<text class="price">￥16</text></view>
 			<view class="submit">立即支付</view>
 		</view>
-	</view>
+	</clickview>
 </template>
 
 <script>
+	import clickview from '@/component/clickview/clickview.vue'
 	export default {
 		data() {
 			return {
 				
 			};
+		},
+		components:{
+			clickview
 		}
 	}
 </script>

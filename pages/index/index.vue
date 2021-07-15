@@ -1,5 +1,5 @@
 <template>
-	<view class="container" @click="test">
+	<clickview class="container">
 		<input class="search" placeholder="搜索石油站点" placeholder-class="input_pla"/>
 		<swiper class="display_area" indicator-dots=true indicator-color=rgba(255,255,255,0.5) autoplay=true indicator-active-color=rgba(255,255,255)>
 			<swiper-item v-for="item in 3">
@@ -42,15 +42,17 @@
 				</view>
 		</view>
 		<view class="wave" v-show="reaction" :style="{top:top+safeTop+'px',left:left+'px'}"></view>
-	</view>
+	</clickview>
 </template>
 
 <script>
 	import { mapState ,mapMutations} from 'vuex'
 	import loadingCar from '@/component/loading-car/loading-car.vue'
+	import clickview from '@/component/clickview/clickview.vue'
 	export default {
 		components:{
-			loadingCar
+			loadingCar,
+			clickview
 		},
 		data() {
 			return {
@@ -107,15 +109,6 @@
 				}
 				return arr1
 			},
-			test(e){
-				let that=this
-				this.reaction=true
-				this.left=e.detail.x
-				this.top=e.detail.y
-				setTimeout(()=>{
-					that.reaction=false
-				},1000)
-			},
 			click_good(index){
 				let that =this
 				this.goodList[index].checked=true
@@ -137,9 +130,6 @@
 		mounted(){
 			this.footbarChange(0)
 			
-			let system=uni.getSystemInfoSync().platform
-			if(system=='ios')
-				this.safeTop=45
 				
 			this.showLoading(true)
 		},
